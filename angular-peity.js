@@ -1,15 +1,15 @@
 var angularPeity = angular.module( 'angular-peity', [] );
 
 
-angularPeity.directive( 'pieChart', function () {
+var buildChartDirective = function ( chartType ) {
 	return {
 		restrict: 'E',
 		scope: {
-			data: "="
+			data: "=",
+			options: "="
 		},
 		link: function ( scope, element, attrs ) {
 
-			// make a span element for the chart
 			var span = document.createElement( 'span' );
 			span.textContent = scope.data;
 
@@ -19,16 +19,34 @@ angularPeity.directive( 'pieChart', function () {
                 element[0].appendChild( span );
             }
 
-			var options = {};
-			if ( attrs.fill ) {
-				options.fill = attrs.fill;
-			}
-			if ( attrs.diameter ) {
-				options.diameter = attrs.diameter;
-			}
+            var options = {};
+            if ( scope.options ) {
+				options = scope.options;
+            }
 
-            jQuery( span ).peity( "pie", options );
+            jQuery( span ).peity( chartType, options );
 
 		}
 	};
+};
+
+
+angularPeity.directive( 'pieChart', function () {
+
+	return buildChartDirective( "pie" );
+
+} );
+
+
+angularPeity.directive( 'barChart', function () {
+
+	return buildChartDirective( "bar" );
+
+} );
+
+
+angularPeity.directive( 'lineChart', function () {
+
+	return buildChartDirective( "line" );
+
 } );
