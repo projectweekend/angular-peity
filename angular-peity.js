@@ -13,6 +13,12 @@ angularPeity.directive( 'pieChart', function () {
 			var span = document.createElement( 'span' );
 			span.textContent = scope.data;
 
+            if (element[0].nodeType === 8) {
+                element.replaceWith( span );
+            } else {
+                element[0].appendChild( span );
+            }
+
 			var options = {};
 			if ( attrs.fill ) {
 				options.fill = attrs.fill;
@@ -21,13 +27,7 @@ angularPeity.directive( 'pieChart', function () {
 				options.diameter = attrs.diameter;
 			}
 
-			jQuery( span ).peity( "pie", options );
-
-            if (element[0].nodeType === 8) {
-                element.replaceWith( span );
-            } else {
-                element[0].appendChild( span );
-            }
+            jQuery( span ).peity( "pie", options );
 
 		}
 	};
