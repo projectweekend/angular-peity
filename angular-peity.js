@@ -10,18 +10,18 @@ var buildChartDirective = function ( chartType ) {
 		},
 		link: function ( scope, element, attrs ) {
 
+            var options = {};
+            if ( scope.options ) {
+				options = scope.options;
+            }
+
 			var span = document.createElement( 'span' );
-			span.textContent = scope.data;
+			span.textContent = scope.data.join();
 
             if (element[0].nodeType === 8) {
                 element.replaceWith( span );
             } else {
                 element[0].appendChild( span );
-            }
-
-            var options = {};
-            if ( scope.options ) {
-				options = scope.options;
             }
 
             jQuery( span ).peity( chartType, options );

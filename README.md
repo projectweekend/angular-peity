@@ -33,7 +33,7 @@ var app = angular.module('myApp', [
 ## Use it
 This module creates three custom directives (tags) that can be used anywhere in your templates. Each directive uses two attributes that are bound to properties of a controller.
 
-* **data** - This attribute is required and is used to supply the data points that the chart will display. It simplest implementation would be a comma separated list of values.
+* **data** - This attribute is required and is used to supply the data points that the chart will display in an array.
 
 * **options** - This attribute is not required. If used it should be an object with property names that match the available options for the type of chart being used. Information about specific options for each chart type is available at: [http://benpickles.github.io/peity/](http://benpickles.github.io/peity/).
 
@@ -50,14 +50,14 @@ cMod.controller( 'ChartCtrl', function ( $scope ) {
         data from an actual API response. :)
     */
     $scope.PieChart = {
-        data: "1, 2, 3, 4",
+        data: [1, 2, 3, 4],
         options: {
             diameter: 150
         }
     };
 
     $scope.BarChart = {
-        data: "1, 2, 3, 4",
+        data: [1, 2, 3, 4],
         options: {
             width: 150,
             height: 150
@@ -65,7 +65,7 @@ cMod.controller( 'ChartCtrl', function ( $scope ) {
     };
 
     $scope.LineChart = {
-        data: "1, 2, 3, 4, 3, 1",
+        data: [1, 2, 3, 4, 3, 1],
         options: {
             width: 150,
             stroke: "#eee"
