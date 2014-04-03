@@ -19,7 +19,7 @@ Include the file before the main app file:
 ~~~
 
 ### Step 3
-Add `angular-fully-loaded` to the app requirements (`/js/app.js`).
+Add `angular-peity` to the app requirements (`/js/app.js`).
 ~~~javascript
 var app = angular.module('myApp', [
     'myApp.controllers',
