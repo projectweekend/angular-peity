@@ -18,6 +18,12 @@ var buildChartDirective = function ( chartType ) {
 			var span = document.createElement( 'span' );
 			span.textContent = scope.data.join();
 
+            if ( !attrs.class ) {
+                span.className = "";
+            } else {
+                span.className = attrs.class;
+            }            
+
             if (element[0].nodeType === 8) {
                 element.replaceWith( span );
             } else {
