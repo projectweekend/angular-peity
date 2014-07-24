@@ -1,8 +1,8 @@
 {
-  "name": "angular-piety",
-  "main": "angular-piety.js",
+  "name": "angular-peity",
+  "main": "angular-peity.js",
   "version": "0.0.1",
-  "homepage": "https://github.com/projectweekend/angular-piety",
+  "homepage": "https://github.com/projectweekend/angular-peity",
   "authors": [
     "Brian Hines <brian@projectweekend.net>"
   ],
