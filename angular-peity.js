@@ -10,27 +10,37 @@ var buildChartDirective = function ( chartType ) {
 		},
 		link: function ( scope, element, attrs ) {
 
-            var options = {};
-            if ( scope.options ) {
-				options = scope.options;
-            }
+		var options = {};
+		if ( scope.options ) {
+			options = scope.options;
+		}
 
-			var span = document.createElement( 'span' );
+		var span = document.createElement( 'span' );
+		span.textContent = scope.data.join();
+
+		if ( !attrs.class ) {
+			span.className = "";
+		} else {
+			span.className = attrs.class;
+		}
+
+		if (element[0].nodeType === 8) {
+			element.replaceWith( span );
+		} else {
+			element[0].appendChild( span );
+		}
+
+		jQuery( span ).peity( chartType, options );
+
+		var watcher = scope.$watch('data', function(){
 			span.textContent = scope.data.join();
+			jQuery( span ).change();
+		})
 
-            if ( !attrs.class ) {
-                span.className = "";
-            } else {
-                span.className = attrs.class;
-            }
+		scope.$on('$destroy', function(){
+			watcher();
+		});
 
-            if (element[0].nodeType === 8) {
-                element.replaceWith( span );
-            } else {
-                element[0].appendChild( span );
-            }
-
-            jQuery( span ).peity( chartType, options );
 
 		}
 	};
