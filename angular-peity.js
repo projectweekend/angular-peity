@@ -1,49 +1,56 @@
 var angularPeity = angular.module( 'angular-peity', [] );
 
 
-var buildChartDirective = function ( chartType ) {
-	return {
-		restrict: 'E',
-		scope: {
-			data: "=",
-			options: "="
-		},
-		link: function ( scope, element, attrs ) {
+var buildChartDirective = function(chartType) {
+  'use strict';
 
-		var options = {};
-		if ( scope.options ) {
-			options = scope.options;
-		}
+  return {
+    restrict: 'E',
+    scope: {
+      data: "=",
+      options: "="
+    },
+    link: function(scope, element, attrs) {
 
-		var span = document.createElement( 'span' );
-		span.textContent = scope.data.join();
+      var options = {};
 
-		if ( !attrs.class ) {
-			span.className = "";
-		} else {
-			span.className = attrs.class;
-		}
+      if (scope.options) {
+        options = scope.options;
+      }
 
-		if (element[0].nodeType === 8) {
-			element.replaceWith( span );
-		} else {
-			element[0].appendChild( span );
-		}
+      var span = document.createElement('span');
+      span.style.display = "none";
+      span.textContent = scope.data.join();
 
-		jQuery( span ).peity( chartType, options );
+      if (!attrs.class) {
+        span.className = "";
+      } else {
+        span.className = attrs.class;
+      }
 
-		var watcher = scope.$watch('data', function(){
-			span.textContent = scope.data.join();
-			jQuery( span ).change();
-		})
+      if (element[0].nodeType === 8) {
+        element.replaceWith(span);
+      } else {
+        element[0].appendChild(span);
+      }
 
-		scope.$on('$destroy', function(){
-			watcher();
-		});
+      jQuery(span).peity(chartType, options);
 
+      var watcher = scope.$watch('data', function(){
+        span.textContent = scope.data.join();
+        jQuery( span ).change();
+      });
 
-		}
-	};
+      scope.$on('$destroy', function(){
+        watcher();
+      });
+
+      jQuery(window).resize(function() {
+        jQuery(span).peity(chartType, options);
+      });
+
+    }
+  };
 };
 
 
