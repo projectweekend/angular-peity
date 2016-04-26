@@ -39,7 +39,7 @@ var buildChartDirective = function(chartType) {
       var watcher = scope.$watch('data', function(){
         span.textContent = scope.data.join();
         jQuery( span ).change();
-      });
+      }, true);
 
       scope.$on('$destroy', function(){
         watcher();
